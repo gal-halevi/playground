@@ -22,7 +22,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         with:
-          repository: ${{ matrix.repos }}
+          repository: gal-halevi/${{ matrix.repos }}
           path: ${{ matrix.repos }}
           
       - name: Verify workspace
