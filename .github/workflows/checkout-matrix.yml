@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        repos: [env.REPO_NAME, "odin-landing-page", "odin-recipes"]
+        repos: [$REPO_NAME, "odin-landing-page", "odin-recipes"]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
