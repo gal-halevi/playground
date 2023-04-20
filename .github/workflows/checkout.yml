@@ -32,14 +32,14 @@ jobs:
           path: recipe
           
       - name: Verify workspace
-        run: ll ${{ github.workspace }}
+        run: ls -l ${{ github.workspace }}
           
       - name: Verify play
-        run: ll ${{ github.workspace }}/play
+        run: ls -l ${{ github.workspace }}/play
         
       - name: Verify page
-        run: ll ${{ github.workspace }}/page
+        run: ls -l ${{ github.workspace }}/page
         
       - name: Verify recipe
-        run: ll ${{ github.workspace }}/recipe
+        run: ls -l ${{ github.workspace }}/recipe
           
