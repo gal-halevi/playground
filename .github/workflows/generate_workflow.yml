@@ -30,4 +30,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run script to generate workflow
-        run: python generate_workflow.py
+        run: python .devops/generate_workflow.py
