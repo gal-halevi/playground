@@ -31,3 +31,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run script to generate workflow
         run: python .devops/generate_workflow.py
+        
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Generate workflow
