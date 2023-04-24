@@ -1,0 +1,6 @@
+name: Checkout manifest
+on:
+  pull_request: [opened]
+jobs:
+  Checkout manifest:
+    runs-on: ubuntu-latest
