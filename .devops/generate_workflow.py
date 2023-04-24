@@ -21,7 +21,7 @@ for component, component_data in manifest.items():
     })
     steps.append(component_dict)
 
-template["jobs"]["Checkout manifest"]["steps"] = steps
+template["jobs"]["Checkout-Manifest"]["steps"] = steps
 
 yml_file = YAML()
 yaml_file = Path(".github/workflows/checkout_manifest.yml")
