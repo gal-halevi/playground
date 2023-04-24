@@ -14,3 +14,8 @@ jobs:
       with:
         repository: gal-halevi/deploy-to-azure
         path: deploy-to-azure
+        
+    - uses: actions/upload-artifact@v3
+      with:
+        name: reusable-workflows
+        path: reusable-workflows/
