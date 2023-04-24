@@ -1,6 +1,7 @@
 name: Checkout manifest
 on:
-  pull_request: [opened]
+  pull_request: 
+    types: [opened, synchronize]
 jobs:
-  Checkout manifest:
+  Checkout-Manifest:
     runs-on: ubuntu-latest
