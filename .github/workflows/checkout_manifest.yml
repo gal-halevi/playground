@@ -8,9 +8,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        repository: https://github.com/gal-halevi/reusable-workflows.git
+        repository: gal-halevi/reusable-workflows
         path: reusable-workflows
     - uses: actions/checkout@v3
       with:
-        repository: https://github.com/gal-halevi/deploy-to-azure.git
+        repository: gal-halevi/deploy-to-azure
         path: deploy-to-azure
