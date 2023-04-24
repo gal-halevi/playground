@@ -2,6 +2,7 @@ name: Checkout manifest
 on:
   pull_request:
     types: [opened, synchronize]
+  workflow_dispatch:
 jobs:
   Checkout-Manifest:
     runs-on: ubuntu-latest
