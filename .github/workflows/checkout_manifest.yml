@@ -1,1 +1,15 @@
-['reusable-workflows', 'deploy-to-azure']
+name: Checkout manifest
+on:
+  pull_request: [opened]
+jobs:
+  Checkout manifest:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: https://github.com/gal-halevi/reusable-workflows.git
+        path: reusable-workflows
+    - uses: actions/checkout@v3
+      with:
+        repository: https://github.com/gal-halevi/deploy-to-azure.git
+        path: deploy-to-azure
