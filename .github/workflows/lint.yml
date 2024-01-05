@@ -23,6 +23,6 @@ jobs:
           python2.7 -m pip list
 
       - name: Run Lint
-        run:
+        run: |
           summary=$(flake8 $(git diff --name-only origin/${{ github.base_ref }} | grep .py) --max-line-length 180)
           echo "$summary"
