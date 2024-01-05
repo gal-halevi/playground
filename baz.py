@@ -1,4 +1,5 @@
 def foo():
-return 5
+    return 5
 
-a= 5
+
+a = 5
