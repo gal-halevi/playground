@@ -11,10 +11,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install python2.7
+      - name: Install python2.7 & pip
         run: |
           sudo apt -y install python2.7
-          python2.7 --version
+          curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+          python2.7 get-pip.py
 
       - name: Install flake8
         run: |
