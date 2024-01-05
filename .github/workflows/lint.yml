@@ -1,0 +1,28 @@
+name: Python lint
+# on:
+#   pull_request:
+#     types: [opened, reopened, synchronize]
+
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install python2.7 & pip
+        run: |
+          sudo apt -y install python2.7
+          curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+          python2.7 get-pip.py
+
+      - name: Install flake8
+        run: |
+          python2.7 -m pip install flake8
+          python2.7 -m pip list
+
+      - name: Run Lint
+        run:
+          flake8 $(git diff --name-only origin/${{ github.base_ref }} | grep .py) --max-line-length 180
+          
