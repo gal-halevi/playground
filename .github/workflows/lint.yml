@@ -24,6 +24,6 @@ jobs:
 
       - name: Run Lint
         run: |
-          summary=$(flake8 $(git diff --name-only origin/${{ github.base_ref }} | grep .py) --max-line-length 180) || exit_code=$?
+          summary=$(flake8 $(git diff --diff-filter=ABCMRTUX --name-only origin/${{ github.base_ref }} | grep .py) --max-line-length 180) || exit_code=$?
           echo "$summary" >> $GITHUB_STEP_SUMMARY
           exit "$exit_code"
