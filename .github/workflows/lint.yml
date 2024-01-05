@@ -20,5 +20,9 @@ jobs:
 
       - name: Run Lint
         run:
-          flake8 $(git diff --name-only origin/$BASE_REF | grep .py)
+          echo $BASE_REF
+          echo ====================
+          git diff --name-only $BASE_REF
+          echo ====================
+          flake8 $(git diff --name-only $BASE_REF | grep .py)
           
