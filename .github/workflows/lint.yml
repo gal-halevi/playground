@@ -11,9 +11,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.8' 
+      - name: Install python2.7
+        run: |
+          apt -y install python2.7
+          python2 --version
 
       - name: Install flake8
         run: |
