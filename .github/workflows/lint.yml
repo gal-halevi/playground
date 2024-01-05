@@ -15,8 +15,8 @@ jobs:
 
       - name: Install flake8
         run: |
-          python2 -m pip install flake8
-          python -m pip list
+          pip install flake8
+          ip list
 
       - name: Run Lint
         run:
