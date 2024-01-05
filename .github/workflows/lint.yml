@@ -14,7 +14,7 @@ jobs:
       - name: Install python2.7
         run: |
           sudo apt -y install python2.7
-          python2 --version
+          python2.7 --version
 
       - name: Install flake8
         run: |
