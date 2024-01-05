@@ -22,7 +22,7 @@ jobs:
         run:
           echo ${{ github.base_ref }}
           echo ====================
-          git diff --name-only $BASE_REF
+          git diff --name-only ${{ github.base_ref }}
           echo ====================
-          flake8 $(git diff --name-only origin/$BASE_REF | grep .py)
+          flake8 $(git diff --name-only origin/${{ github.base_ref }} | grep .py)
           
