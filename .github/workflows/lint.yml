@@ -1,0 +1,24 @@
+name: Python lint
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '2.7' 
+
+      - name: Install flake8
+        run: |
+          python2 -m pip install flake8
+          python -m pip list
+
+      - name: Run Lint
+        run:
+          flake8 $(git diff --name-only origin/$BASE_REF | grep .py)
+          
