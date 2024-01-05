@@ -20,7 +20,7 @@ jobs:
 
       - name: Run Lint
         run:
-          echo $BASE_REF
+          echo ${{ github.base_ref }}
           echo ====================
           git diff --name-only $BASE_REF
           echo ====================
