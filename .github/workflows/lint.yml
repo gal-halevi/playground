@@ -20,9 +20,5 @@ jobs:
 
       - name: Run Lint
         run:
-          echo ${{ github.base_ref }}
-          echo ====================
-          git diff --name-only ${{ github.base_ref }}
-          echo ====================
           flake8 $(git diff --name-only origin/${{ github.base_ref }} | grep .py)
           
