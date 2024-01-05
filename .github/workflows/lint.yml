@@ -20,5 +20,5 @@ jobs:
 
       - name: Run Lint
         run:
-          flake8 $(git diff --name-only origin/${{ github.base_ref }} | grep .py)
+          flake8 $(git diff --name-only origin ${{ github.base_ref }} | grep .py)
           
