@@ -24,4 +24,4 @@ jobs:
 
       - name: Run Lint
         run:
-          lake8 $(git diff --name-only origin/${{ github.base_ref }} | grep .py) --max-line-length 180
+          flake8 $(git diff --name-only origin/${{ github.base_ref }} | grep .py) --max-line-length 180
