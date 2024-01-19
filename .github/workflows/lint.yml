@@ -23,4 +23,13 @@ jobs:
           python2.7 -m pip list
 
       - name: Run Lint
-        run: flake8 --max-line-length 180 --tee --output-file $GITHUB_STEP_SUMMARY $(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          flake8 --max-line-length 180 --tee --output-file report $(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py) || EXIT_CODE=$?
+          cat report >> "$GITHUB_STEP_SUMMARY"
+          if [ $EXIT_CODE ]; then
+            gh pr comment $PR_NUMBER -b "Issues Found:\n$(cat report)"
+            exit $EXIT_CODE
+          fi
