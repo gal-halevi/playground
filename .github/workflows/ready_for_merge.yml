@@ -9,7 +9,13 @@ jobs:
       REPO: ${{ github.repository }}
       PR_NUMBER: ${{ github.event.number }}
       GH_TOKEN: ${{ github.token }}
-    steps:      
+    steps:
+      - name: Print the Github Context
+        shell: bash
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          
       - name: Get Pull reuqest
         run: | 
           PR = $(gh api \
