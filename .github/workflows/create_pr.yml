@@ -1,0 +1,27 @@
+name: "Create PR"
+on:
+  workflow_dispatch:
+jobs:
+  Increment:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Commit & push
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          VER=$(cat version)
+          BRANCH_NAME=increment-$VER
+          git switch -c $BRANCH_NAME
+          VER=$((VER+=1))
+          echo $VER > version
+          git add -u
+          git commit -m "increment"
+          git push origin $BRANCH_NAME
+          gh pr create --title "Increment version" --body $VER
