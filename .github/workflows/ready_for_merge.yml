@@ -26,9 +26,9 @@ jobs:
           echo "MERGEABLE=$(echo $PR | jq '.mergeable_state')" >> "$GITHUB_ENV"
           
       - name: Checkout repo
-        if: ${{ ENV.MERGEABLE }} == "clean"
+        if: env.MERGEABLE == 'clean'
         uses: actions/checkout@v3
       
       - name: Create Label
-        if: ${{ ENV.MERGEABLE }} == "clean"
+        if: env.MERGEABLE == 'clean'
         run: gh pr edit $PR_NUMBER --add-label "Ready for merge"
