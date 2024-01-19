@@ -23,4 +23,4 @@ jobs:
           python2.7 -m pip list
 
       - name: Run Lint
-        run: flake8 $(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py) --max-line-length 180) --tee --output-file $GITHUB_STEP_SUMMARY
+        run: flake8 --tee --output-file $GITHUB_STEP_SUMMARY $(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py) --max-line-length 180)
