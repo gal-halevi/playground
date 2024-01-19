@@ -1,9 +1,7 @@
-def Foo():
+def foo():
     return 5
 
-max = 6
-class fooFaz():
-    def Baz(s):
-        pass
 
-a = b
+class FooFaz:
+    def baz(self):
+        pass
