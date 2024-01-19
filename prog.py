@@ -1,5 +1,8 @@
+
 print "sdfsd"
+
 a = 5
+a
 
 b = {1: 0}
 
