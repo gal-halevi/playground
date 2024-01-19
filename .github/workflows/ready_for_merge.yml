@@ -5,29 +5,20 @@ on:
 jobs:
   PullRequestMergable:
     runs-on: ubuntu-latest
-    steps:
-      - name: Print the Github Context
-        shell: bash
-        run: echo "$GITHUB_CONTEXT"
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-          
-      - name: Checkout
-        uses: actions/checkout@v3
-
+    env:
+      REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.number }}
+      GH_TOKEN: ${{ github.token }}
+    steps:      
       - name: Get Pull reuqest
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: | 
           PR = $(gh api \
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          /repos/$GITHUB_REPOSITORY/pulls/$GITHUB_EVENT_NUMBER)
+          /repos/$REPO/pulls/$PR_NUMBER)
           echo $PR
           echo "MERGEABLE=$(echo $PR | jq '.mergeable_state')" >> "$GITHUB_ENV"
           
       - name: Create Label
         if: ${{ ENV.MERGEABLE }} == "clean"
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh pr edit ${{ github.event.number }} --add-label "Ready for merge"
+        run: gh pr edit $PR_NUMBER --add-label "Ready for merge"
