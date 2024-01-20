@@ -20,4 +20,5 @@ jobs:
       - name: Trigger workflow
         continue-on-error: true
         run: |
-          echo '{"pull_request_number":$PR_NUMBER}' | gh workflow run create_label.yml --json
+          echo '{"pull_request_number":"$PR_NUMBER"}'
+          echo '{"pull_request_number":"$PR_NUMBER"}' | gh workflow run create_label.yml --json
