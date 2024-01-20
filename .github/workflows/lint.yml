@@ -30,7 +30,12 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           FILES_TO_SCAN=$(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py)
-          [ -z "$FILES_TO_SCAN" ] && exit 0
+          echo $FILES_TO_SCAN
+          if [ -z "$FILES_TO_SCAN" ]; then
+            echo "No files to scan"
+            exit 0
+          fi
+          
           flake8 --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
           cat report >> "$GITHUB_STEP_SUMMARY"
           if [ $EXIT_CODE ]; then
