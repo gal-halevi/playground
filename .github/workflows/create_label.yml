@@ -11,13 +11,14 @@ jobs:
     env:
       PR_NUMBER: ${{ inputs.pull_request_number }}
       GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
     steps:
       - name: Get Pull reuqest
         run: | 
           PR=$(gh api \
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          /repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER)
+          /repos/$REPO/pulls/$PR_NUMBER)
           echo $PR | jq
           echo "MERGEABLE=$(echo $PR | jq '.mergeable_state')" >> "$GITHUB_ENV"
 
