@@ -1,7 +1,6 @@
 name: Ready For Merge
 on:
   pull_request_review:
-    types: ['submitted']
 jobs:
   PullRequestMergable:
     if: github.event.review.state != 'commented'
