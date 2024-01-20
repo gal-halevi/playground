@@ -6,6 +6,8 @@ on:
 jobs:
   Lint:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -23,4 +25,19 @@ jobs:
           python2.7 -m pip list
 
       - name: Run Lint
-        run: flake8 --max-line-length 180 --tee --output-file $GITHUB_STEP_SUMMARY $(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        # || true is for avoiding grep exit code 1 when there's no match
+        run: |
+          FILES_TO_SCAN=$(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py || true)
+          if [ -z "$FILES_TO_SCAN" ]; then
+            echo "No files to scan"
+            exit 0
+          fi
+          flake8 --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
+          cat report >> "$GITHUB_STEP_SUMMARY"
+          if [ $EXIT_CODE ]; then
+            gh pr comment $PR_NUMBER -b "[Issues found](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})<br/><br/>**Please fix:**<br/>$(cat report)"
+            exit $EXIT_CODE
+          fi
