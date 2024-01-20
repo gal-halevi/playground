@@ -1,0 +1,29 @@
+name: Add label
+on:
+  workflow_dispatch:
+    inputs:
+      pull_request_number:
+        type: string
+        required: true
+jobs:
+  AddLabel:
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ inputs.pull_request_number }}
+    steps:
+      - name: Get Pull reuqest
+        run: | 
+          PR=$(gh api \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          /repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER)
+          echo $PR | jq
+          echo "MERGEABLE=$(echo $PR | jq '.mergeable_state')" >> "$GITHUB_ENV"
+
+      - name: Checkout repo
+        if: env.MERGEABLE == 'clean'
+        uses: actions/checkout@v3
+      
+      - name: Create Label
+        if: env.MERGEABLE == 'clean'
+        run: gh pr edit $PR_NUMBER --add-label "Ready for merge"
