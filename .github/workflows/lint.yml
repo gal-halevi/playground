@@ -29,6 +29,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
+          git merge origin/${{ github.base_ref }} 
           flake8 --max-line-length 180 --tee --output-file report $(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py) || EXIT_CODE=$?
           cat report >> "$GITHUB_STEP_SUMMARY"
           if [ $EXIT_CODE ]; then
