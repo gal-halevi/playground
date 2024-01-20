@@ -4,6 +4,7 @@ on:
     types: ['submitted']
 jobs:
   PullRequestMergable:
+    if: github.event.review.state != 'commented'
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ github.event.pull_request.number }}
