@@ -14,6 +14,8 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+
+      - uses: actions/checkout@v3
           
       - name: Trigger workflow
         continue-on-error: true
