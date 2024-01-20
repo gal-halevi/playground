@@ -24,9 +24,12 @@ jobs:
       - run: echo "MERGEABLE=$MERGEABLE"
 
       - name: Checkout repo
-        if: env.MERGEABLE == 'clean'
         uses: actions/checkout@v3
       
-      - name: Create Label
+      - name: Add Label
         if: env.MERGEABLE == 'clean'
         run: gh pr edit $PR_NUMBER --add-label "Ready for merge"
+
+      - name: Remove Label
+        if: env.MERGEABLE != 'clean'
+        run: gh pr edit $PR_NUMBER --remove-label "Ready for merge"
