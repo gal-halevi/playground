@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ inputs.pull_request_number }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Get Pull reuqest
         run: | 
