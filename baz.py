@@ -5,3 +5,4 @@ def foo():
 class FooFaz:
     def baz(self):
         pass
+        
