@@ -9,4 +9,4 @@ b = {1: 0}
 
 
 def foo():
-    pass
+    print "pass"
