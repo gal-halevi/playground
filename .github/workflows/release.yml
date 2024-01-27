@@ -1,0 +1,29 @@
+name: Release
+on:
+  workflow_dispatch:
+
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: echo "Build"
+
+      - name: Increment version
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          VER=$(cat version)
+          BRANCH_NAME=increment-$VER
+          git switch -c $BRANCH_NAME
+          VER=$((VER+=1))
+          echo $VER > version
+          git add -u
+          git commit -m "increment"
+          git push origin $BRANCH_NAME
+          echo "VERSION=$VER" >> "$GITHUB_ENV"
+
+      - name: Create Release & Notes
+        run: gh release create v1.2.$VERSION --generate-notes
