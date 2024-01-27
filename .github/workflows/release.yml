@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  Lint:
+  Release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build
         run: echo "Build"
@@ -20,7 +20,7 @@ jobs:
           echo $VER > version
           git add -u
           git commit -m "increment version $VER"
-          git push
+          git push -f
           echo "VERSION=$VER" >> "$GITHUB_ENV"
 
       - name: Create Release & Notes
