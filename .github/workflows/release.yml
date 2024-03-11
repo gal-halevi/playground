@@ -1,0 +1,21 @@
+name: Release
+on:
+  workflow_dispatch:
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: echo "Build"
+      - name: Increment version
+        run: |
+          VER=$(cat version)
+          VER=$((VER+=1))
+          echo $VER > version
+          echo "VERSION=$VER" >> "$GITHUB_ENV"
+      - name: Create Release & Notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create v1.2.$VERSION --generate-notes
