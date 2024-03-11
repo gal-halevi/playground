@@ -1,0 +1,25 @@
+name: "Verify PR Title"
+on:
+  pull_request:
+    types: [opened, reopened, edited]
+    paths-ignore:
+      - '.github/**'
+jobs:
+  Verify-Title:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const payload = context.payload
+          const prTitle = payload.pull_request.title
+
+          const jiraPattern = /[A-Z]+[0-9]*-[0-9]+: /g
+          if (!jiraPattern.test(prTitle)) {
+            await core.summary
+            .addRaw(`PR title is not valid. Title should start with the following regex: ${jiraPattern}`).addEOL()
+            .addRaw("For example: `UFS-1234: `").addEOL()
+            .write()
+            core.setFailed()
+          }
