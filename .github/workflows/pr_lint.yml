@@ -12,4 +12,4 @@ jobs:
 
       - name: Run Ruff
         continue-on-error: true
-        run: docker run -p 443:443 -v .:/io --rm ghcr.io/astral-sh/ruff:0.5.7 check --output-format=github .
+        run: docker run -p 443:443 -v .:/io --rm ghcr.io/astral-sh/ruff:0.5.6 check --output-format=github .
