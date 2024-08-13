@@ -1,0 +1,19 @@
+name: CI
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - '**.py'
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/astral-sh/ruff:0.5.7
+      volumes:
+        - .:/io
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Ruff
+        continue-on-error: true
+        run: ruff check --output-format=github .
