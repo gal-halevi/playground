@@ -8,7 +8,7 @@ jobs:
   Lint:
     runs-on: ubuntu-latest
     container:
-      image: astral-sh/ruff:0.5.7
+      image: ghcr.io/astral-sh/ruff:0.5.7
       volumes:
         - .:/io
     steps:
