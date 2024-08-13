@@ -6,9 +6,12 @@ on:
       - '**.py'
 jobs:
   Lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     container:
-      image: ghcr.io/astral-sh/ruff@sha256:afed56d25edc26eee7406a7b16347e7b5202a5879dc18b2803a86a9c6e270b92
+      image: ghcr.io/astral-sh/ruff:0.5.6
       volumes:
         - .:/io
     steps:
