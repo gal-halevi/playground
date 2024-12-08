@@ -1,3 +1,5 @@
+print("sdfsd")
+a = 5
 
 print "sdfsd"
 
